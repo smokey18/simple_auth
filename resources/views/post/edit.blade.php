@@ -19,7 +19,7 @@
                     {{ Session::get('fail') }}
                 </div>
                 @endif
-                <form action="{{ route('update') }}" method="POST">
+                <form action="{{ route('update') }}" method="POST" enctype="multipart/form-data">
 
                     @csrf
                 <input type="hidden" name="cid" value="{{ $list->id }}">
@@ -32,6 +32,7 @@
                     <div class="form-group">
                         <label for="image">Post Image</label>
                         <input type="file" class="form-control" name="image">
+                        <img src="{{ asset('images/' . $list->image) }}" width="75px" height="70px"/>
                         <span style="color: red">@error('image'){{ $message }} @enderror</span>
                     </div>
 

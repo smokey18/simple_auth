@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class PostController extends Controller
 {
@@ -65,7 +66,20 @@ class PostController extends Controller
 
         $Post = Post::find($request->input('cid'));
         $Post->content = $request->content;
-        $Post->image = $request->image;
+
+        if ($request->hasFile('image')) {
+
+            $path = 'images/' . $Post->image;
+            if (File::exists($path)) {
+                File::delete($path);
+            }
+
+            $file = $request->file('image');
+            $extension  = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $file->move('images/', $filename);
+            $Post->image = $filename;
+        }
 
         $Post->save();
 
