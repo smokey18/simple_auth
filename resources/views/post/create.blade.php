@@ -1,5 +1,5 @@
 @extends('layouts.header')
-@section('title', 'Add a Post')
+@section('title', 'Add New Post')
 @section('content')
     <div class="container">
         <div class="row">
@@ -18,17 +18,17 @@
                     {{ Session::get('fail') }}
                 </div>
                 @endif
-                <form action="store" method="POST">
+                <form action="store" method="POST" enctype="multipart/form-data">
 
                     @csrf
                     <div class="form-group">
-                        <label for="content">Posts Content</label>
+                        <label for="content">Post Content</label>
                         <input type="text" class="form-control" name="content" value="{{ old('content') }}">
                         <span style="color: red">@error('content'){{ $message }} @enderror</span>
                     </div>
 
                     <div class="form-group">
-                        <label for="image">Image</label>
+                        <label for="image">Post Image</label>
                         <input type="file" class="form-control" name="image">
                         <span style="color: red">@error('image'){{ $message }} @enderror</span>
                     </div>

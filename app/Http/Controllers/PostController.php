@@ -27,12 +27,20 @@ class PostController extends Controller
             'content' => 'required'
         ]);
 
-        $query = Post::insert([
-            'content' => $request->input('content'),
-            'image' => $request->input('image')
-        ]);
+        $Post = new Post;
 
-        if ($query) {
+        $Post->content = $request->input('content');
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $extension  = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $file->move('images/', $filename);
+            $Post->image = $filename;
+        }
+
+        $Post->save();
+
+        if ($Post) {
             return back()->with('success', 'Post have been successfully inserted');
         } else {
             return back()->with('fail', 'Something went wrong');

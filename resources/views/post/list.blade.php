@@ -19,7 +19,7 @@
                         <tr>
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->content }}</td>
-                            <td><img src="{{ asset('public/images/' . $item->image) }}" /></td>
+                            <td><img src="{{ asset('images/' . $item->image) }}" width="75px" height="70px"/></td>
                             <td>
                                 <div class="btn-group">
                                     <a href="delete/{{ $item->id }}" class="btn btn-danger btn-xs">Delete</a>
