@@ -29,7 +29,7 @@
 
                     <div class="form-group">
                         <label for="image">Post Image</label>
-                        <input type="file" class="form-control" name="image">
+                        <input type="file" class="form-control" name="image[]" multiple>
                         <span style="color: red">@error('image'){{ $message }} @enderror</span>
                     </div>
 

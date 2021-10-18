@@ -25,23 +25,25 @@ class PostController extends Controller
     function store(Request $request)
     {
         $request->validate([
-            'content' => 'required'
+            'content' => 'required',
+            'image' => 'required'
         ]);
 
-        $Post = new Post;
-
-        $Post->content = $request->input('content');
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $extension  = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extension;
-            $file->move('images/', $filename);
-            $Post->image = $filename;
+        $image = array();
+        if ($file = $request->file('image')) {
+            foreach ($file as $file) {
+                $extension  = $file->getClientOriginalExtension();
+                $filename = time() . '.' . $extension;
+                $file->move('images/', $filename);
+                $image[] = $filename;
+            }
+            Post::create([
+                'content' => $request->content,
+                'image' => implode('|', $image),
+            ]);
         }
 
-        $Post->save();
-
-        if ($Post) {
+        if ($image) {
             return back()->with('success', 'Post have been successfully inserted');
         } else {
             return back()->with('fail', 'Something went wrong');
