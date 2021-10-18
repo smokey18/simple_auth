@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.header')
 
 @section('content')
 <div class="container">
@@ -14,9 +14,7 @@
                         </div>
                     @endif
 
-                    
                     <h2>Welcome {{ Auth::user()->name }} </h2>
-
 
                     <div class="card-body">
                         <h5>A brief introduction</h5>
