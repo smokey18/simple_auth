@@ -31,10 +31,10 @@ class PostController extends Controller
 
         $image = array();
         if ($file = $request->file('image')) {
-            foreach ($file as $file) {
-                $extension  = $file->getClientOriginalExtension();
+            foreach ($file as $newFile) {
+                $extension  = $newFile->getClientOriginalExtension();
                 $filename = time() . '.' . $extension;
-                $file->move('images/', $filename);
+                $newFile->move('images/', $filename);
                 $image[] = $filename;
             }
             Post::create([
