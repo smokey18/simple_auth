@@ -31,19 +31,18 @@ class UserController extends Controller
         ]);
 
         $image = array();
-        if ($file = $request->file('image')) {
-            foreach ($file as $newFile) {
-                $extension  = $newFile->getClientOriginalExtension();
-                $filename = time() . '.' . $extension;
-                $newFile->move('images/', $filename);
-                $image[] = $filename;
-            }
-            Post::create([
-                'user_id' => Auth::user()->id,
-                'content' => $request->content,
-                'image' => implode('|', $image),
-            ]);
+        foreach ($request->file('image') as $newFile) {
+            $extension  = $newFile->getClientOriginalExtension();
+            $filename = rand(1000000000, 9999999999) . '.' . $extension;
+            $newFile->move('images/', $filename);
+            $image[] = $filename;
         }
+        Post::create([
+            'user_id' => Auth::user()->id,
+            'content' => $request->content,
+            'image' => implode('|', $image),
+
+        ]);
 
         if ($image) {
             return back()->with('success', 'Post have been successfully inserted');

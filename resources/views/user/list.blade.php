@@ -21,7 +21,11 @@
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->user->name }}</td>
                             <td>{{ $item->content }}</td>
-                            <td><img src="{{ asset('images/' . $item->image) }}" width="75px" height="70px"/></td>
+                            <td>
+                                @foreach (explode('|', $item->image) as $newImage)
+                                    <img width="75px" height="70px" src="/images/{{ $newImage }}">
+                                @endforeach
+                            </td>
                             <td>
                                 <div class="btn-group">
                                     <a href="delete/{{ $item->id }}" class="btn btn-danger btn-xs">Delete</a>
