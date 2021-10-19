@@ -1,4 +1,4 @@
-@extends('layouts.header')
+@extends('layouts.admin_header')
 @section('title', 'Posts List')
 @section('content')
 

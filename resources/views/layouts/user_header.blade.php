@@ -43,10 +43,10 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('list') }}">Posts List</a>
+                            <a class="nav-link" href="{{ route('user.list') }}">Posts List</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('create') }}">Create Post</a>
+                            <a class="nav-link" href="{{ route('user.create') }}">Create Post</a>
                         </li>
                     </ul>
 

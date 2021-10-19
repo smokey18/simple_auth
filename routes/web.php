@@ -18,19 +18,30 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['middleware' => ['PreventBackButton']], function () {
+Auth::routes();
 
-    Route::get('/list', '\App\Http\Controllers\PostController@index')->name('list')->middleware('auth');
-    Route::get('/create', '\App\Http\Controllers\PostController@create')->name('create')->middleware('auth');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-    Route::post('/store', 'App\Http\Controllers\PostController@store')->middleware('auth');
+Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin', 'auth', 'PreventBackButton']], function () {
 
-    Route::get('/edit/{id}', 'App\Http\Controllers\PostController@edit')->middleware('auth');
-    Route::post('/update', 'App\Http\Controllers\PostController@update')->name('update')->middleware('auth');
+    Route::get('/list', '\App\Http\Controllers\AdminController@index')->name('admin.list');
+    Route::get('/create', '\App\Http\Controllers\AdminController@create')->name('admin.create');
 
-    Route::get('/delete/{id}', 'App\Http\Controllers\PostController@destroy')->middleware('auth');
+    Route::post('/store', 'App\Http\Controllers\AdminController@store');
 
-    Auth::routes();
+    Route::get('/edit/{id}', 'App\Http\Controllers\AdminController@edit');
+    Route::post('/update', 'App\Http\Controllers\AdminController@update')->name('admin.update');
 
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/delete/{id}', 'App\Http\Controllers\AdminController@destroy');
+});
+
+Route::group(['prefix' => 'user', 'middleware' => ['isUser', 'auth', 'PreventBackButton']], function () {
+
+    Route::get('/list', '\App\Http\Controllers\UserController@index')->name('user.list');
+    Route::get('/create', '\App\Http\Controllers\UserController@create')->name('user.create');
+
+    Route::post('/store', 'App\Http\Controllers\UserController@store');
+
+    Route::get('/edit/{id}', 'App\Http\Controllers\UserController@edit');
+    Route::post('/update', 'App\Http\Controllers\UserController@update')->name('user.update');
 });

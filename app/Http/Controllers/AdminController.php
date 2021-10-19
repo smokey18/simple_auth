@@ -7,20 +7,19 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
-class PostController extends Controller
+class AdminController extends Controller
 {
-    /*
     function index()
     {
         $data = array(
             'list' => Post::all()
         );
-        return view('post.list', $data);
+        return view('admin.list', $data);
     }
 
     function create()
     {
-        return view('post.create');
+        return view('admin.create');
     }
 
     function store(Request $request)
@@ -58,7 +57,7 @@ class PostController extends Controller
             'list' => Post::where('id', $id)->first()
         );
 
-        return view('post.edit', $data);
+        return view('admin.edit', $data);
     }
 
     function update(Request $request)
@@ -86,13 +85,12 @@ class PostController extends Controller
 
         $Post->save();
 
-        return redirect('/list');
+        return redirect('admin/list');
     }
 
     function destroy($id)
     {
         Post::where('id', $id)->delete();
-        return redirect('/list');
+        return redirect('admin/list');
     }
-    */
 }

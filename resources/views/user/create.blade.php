@@ -1,4 +1,4 @@
-@extends('layouts.header')
+@extends('layouts.user_header')
 @section('title', 'Add New Post')
 @section('content')
     <style>

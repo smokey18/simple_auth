@@ -1,4 +1,4 @@
-@extends('layouts.header')
+@extends('layouts.user_header')
 @section('title', 'Edit Post')
 @section('content')
 
@@ -19,7 +19,7 @@
                     {{ Session::get('fail') }}
                 </div>
                 @endif
-                <form action="{{ route('update') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('user.update') }}" method="POST" enctype="multipart/form-data">
 
                     @csrf
                 <input type="hidden" name="cid" value="{{ $list->id }}">
