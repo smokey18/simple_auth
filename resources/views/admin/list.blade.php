@@ -10,6 +10,7 @@
                 <table class="table table-hover">
                     <thead>
                         <th>Sr.</th>
+                        <th>Posts Added by</th>
                         <th>Posts Content</th>
                         <th>Image</th>
                         <th>Actions</th>
@@ -18,6 +19,7 @@
                         @foreach ($list as $item)
                         <tr>
                             <td>{{ $item->id }}</td>
+                            <td>{{ $item->user->name }}</td>
                             <td>{{ $item->content }}</td>
                             <td><img src="{{ asset('images/' . $item->image) }}" width="75px" height="70px"/></td>
                             <td>

@@ -44,4 +44,6 @@ Route::group(['prefix' => 'user', 'middleware' => ['isUser', 'auth', 'PreventBac
 
     Route::get('/edit/{id}', 'App\Http\Controllers\UserController@edit');
     Route::post('/update', 'App\Http\Controllers\UserController@update')->name('user.update');
+
+    Route::get('/delete/{id}', 'App\Http\Controllers\UserController@destroy');
 });

@@ -33,9 +33,9 @@ class LoginController extends Controller
     protected function redirectTo()
     {
         if (Auth()->user()->role == 1) {
-            return route('admin . dashboard');
+            return route('admin.list');
         } elseif (Auth()->user() == 2) {
-            return route('user . dashboard');
+            return route('user.list');
         }
     }
 

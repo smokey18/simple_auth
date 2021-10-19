@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -12,7 +13,7 @@ class UserController extends Controller
     function index()
     {
         $data = array(
-            'list' => Post::all()
+            'list' => Post::where('user_id', Auth::user()->id)->paginate(10)
         );
         return view('user.list', $data);
     }
@@ -22,7 +23,7 @@ class UserController extends Controller
         return view('user.create');
     }
 
-    function store(Request $request)
+    function store(Request $request, User $user)
     {
         $request->validate([
             'content' => 'required',
@@ -38,6 +39,7 @@ class UserController extends Controller
                 $image[] = $filename;
             }
             Post::create([
+                'user_id' => Auth::user()->id,
                 'content' => $request->content,
                 'image' => implode('|', $image),
             ]);
@@ -85,6 +87,12 @@ class UserController extends Controller
 
         $Post->save();
 
+        return redirect('user/list');
+    }
+
+    function destroy($id)
+    {
+        Post::where('id', $id)->delete();
         return redirect('user/list');
     }
 }

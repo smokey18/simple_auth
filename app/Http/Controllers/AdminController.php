@@ -38,6 +38,7 @@ class AdminController extends Controller
                 $image[] = $filename;
             }
             Post::create([
+                'user_id' => Auth::user()->id,
                 'content' => $request->content,
                 'image' => implode('|', $image),
             ]);
