@@ -25,14 +25,16 @@
                 <input type="hidden" name="cid" value="{{ $list->id }}">
                     <div class="form-group">
                         <label for="content">Post Content</label>
-                        <input type="text" class="form-control" name="content" value="{{ $list->content }}">
+                        <textarea name="content" class="form-control" id="text-area">{{ $list->content }}</textarea>
                         <span style="color: red">@error('content'){{ $message }} @enderror</span>
                     </div>
 
                     <div class="form-group">
                         <label for="image">Post Image</label>
                         <input type="file" class="form-control" name="image">
-                        <img src="{{ asset('images/' . $list->image) }}" width="75px" height="70px"/>
+                        @foreach (explode('|', $list->image) as $newImage)
+                            <img width="75px" height="70px" src="/images/{{ $newImage }}">
+                        @endforeach
                         <span style="color: red">@error('image'){{ $message }} @enderror</span>
                     </div>
 

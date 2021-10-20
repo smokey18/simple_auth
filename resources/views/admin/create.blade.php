@@ -29,7 +29,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="content">Post Content</label>
-                        <input type="text" class="form-control" name="content" value="{{ old('content') }}">
+                        <textarea name="content" class="form-control" id="text-area" value="{{ old('content') }}"></textarea>
                         <span style="color: red">@error('content'){{ $message }} @enderror</span>
                     </div>
 
@@ -48,21 +48,4 @@
         </div>
     </div>
 
-    <script>
-        function loadPreview(input){
-            var data = $(input)[0].files; //this file data
-            $.each(data, function(index, file){
-                if(/(\.|\/)(gif|jpe?g|png)$/i.test(file.type)){
-                    var fRead = new FileReader();
-                    fRead.onload = (function(file){
-                        return function(e) {
-                            var img = $('<img/>').addClass('thumb').attr('src', e.target.result); //create image thumb element
-                            $('#thumb-output').append(img);
-                        };
-                    })(file);
-                    fRead.readAsDataURL(file);
-                }
-            });
-        }
-     </script>
 @endsection

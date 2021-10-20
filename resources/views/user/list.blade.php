@@ -20,7 +20,7 @@
                         <tr>
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->user->name }}</td>
-                            <td>{{ $item->content }}</td>
+                            <td>{!! $item->content !!}</td>
                             <td>
                                 @foreach (explode('|', $item->image) as $newImage)
                                     <img width="75px" height="70px" src="/images/{{ $newImage }}">
